@@ -5,4 +5,6 @@ import ua.com.app.model.BankCard;
 
 public interface CardRepository extends JpaRepository<BankCard, Long> {
 
+  BankCard findByNumberOfCard(String number);
+
 }
