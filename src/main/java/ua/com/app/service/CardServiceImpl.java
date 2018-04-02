@@ -18,4 +18,9 @@ public class CardServiceImpl implements CardService {
   public BankCard save(BankCard card) {
     return cardRepository.save(card);
   }
+
+  @Override
+  public BankCard findByNumber(String number) {
+    return cardRepository.findByNumberOfCard(number);
+  }
 }
