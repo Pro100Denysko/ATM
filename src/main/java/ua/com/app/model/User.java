@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -15,9 +18,13 @@ public class User {
   @GeneratedValue
   private Long id;
 
-  @Column
+  @OneToOne
   @JoinColumn(name = "card")
   private BankCard card;
+
+  @NotNull
+  @Transient
+  private String numberOfCard;
 
   @Column(name = "password")
   private String password;
@@ -44,5 +51,13 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getNumberOfCard() {
+    return numberOfCard;
+  }
+
+  public void setNumberOfCard(String numberOfCard) {
+    this.numberOfCard = numberOfCard;
   }
 }
