@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.app.model.BankCard;
+import ua.com.app.model.User;
 import ua.com.app.service.CardServiceImpl;
 
 @RestController
@@ -28,6 +29,16 @@ public class CardController {
       return ResponseEntity.status(HttpStatus.CREATED).build();
     } else {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+  }
+
+  @RequestMapping(value = "/authCard", method = RequestMethod.POST)
+  public ResponseEntity<?> authCard(@RequestBody User user) {
+    BankCard newCard = cardService.findByNumber(user.getNumberOfCard());
+    if (newCard != null && newCard.getUser().getPassword().equals(user.getPassword())) {
+      return ResponseEntity.status(HttpStatus.OK).build();
+    } else {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
   }
 }
