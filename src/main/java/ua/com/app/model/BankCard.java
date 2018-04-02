@@ -1,6 +1,5 @@
 package ua.com.app.model;
 
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +39,7 @@ public class BankCard {
   private String address;
 
   @OneToOne(mappedBy = "card")
-  private Set<User> user;
+  private User user;
 
   public Long getId() {
     return id;
@@ -90,11 +89,11 @@ public class BankCard {
     this.address = address;
   }
 
-  public Set<User> getUser() {
+  public User getUser() {
     return user;
   }
 
-  public void setUser(Set<User> user) {
+  public void setUser(User user) {
     this.user = user;
   }
 }
