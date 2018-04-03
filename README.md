@@ -15,11 +15,11 @@
 Request Method - POST. Body:
 ```json
 {
-	  "name": "name",
-	  "numberOfCard": "1234567890123453",
-	  "birthDate": "birthDate",
-	  "sex": "sex",
-	  "address": "address"
+	 "name": "name",
+	 "numberOfCard": "1234567890123453",
+	 "birthDate": "birthDate",
+	 "sex": "sex",
+	 "address": "address"
 }
 ```
 
@@ -35,11 +35,11 @@ Request Method - POST. Body:
 Request Method - POST. Body:
 ```json
 {
-	  "numberOfCard": "1234567890123456",
-	  "password": "123456"
+	 "numberOfCard": "1234567890123456",
+	 "password": "123456"
 }
 ```
-###Перевод средств с карты на карту.
+### Перевод средств с карты на карту.
  
  В данном методе должен приниматься транспортный объект   со следующими полями 
 - Номер карты отправителя (Валидация - количество символов == 16)
@@ -52,14 +52,13 @@ Request Method - POST. Body:
 Request Method - POST. Body:
 ```json
 {
-	  "numberOfRecipientsCard": "1000200030004000",
-	  "amount": 2000.0,
-	  "sender":	
-		    {
-			      "numberOfCard": "1234567890123456",
-			      "password": "123456"
-		    }
-	
+	 "numberOfRecipientsCard": "1000200030004000",
+	 "amount": 2000.0,
+	 "sender":	
+		   {
+			    "numberOfCard": "1234567890123456",
+			    "password": "123456"
+		   }
 }
 ```
 Response:
@@ -82,7 +81,7 @@ Response:
 }
 ```
 
-###Получение списка всех карт (Сериализация JSON).
+### Получение списка всех карт (Сериализация JSON).
 
 Данные должны быть отсортированы по номерам карт (по возрастанию)
 
