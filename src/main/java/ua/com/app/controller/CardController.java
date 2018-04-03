@@ -1,5 +1,6 @@
 package ua.com.app.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,5 +65,14 @@ public class CardController {
     } else {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+  }
+
+  @RequestMapping(value = "/cards", method = RequestMethod.GET)
+  public ResponseEntity<?> findAllCards() {
+    List<BankCard> listOfCards = cardService.findAll();
+    for (BankCard card : listOfCards) {
+      card.getUser().setCard(null);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(listOfCards);
   }
 }
