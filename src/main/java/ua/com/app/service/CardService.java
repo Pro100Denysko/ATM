@@ -4,6 +4,8 @@ import ua.com.app.model.BankCard;
 
 public interface CardService {
 
-  public BankCard findByNumber(String number);
+  BankCard findByNumber(String number);
+
+  BankCard saveNewCard(BankCard card);
 
 }
