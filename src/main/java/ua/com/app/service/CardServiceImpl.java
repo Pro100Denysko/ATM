@@ -1,5 +1,8 @@
 package ua.com.app.service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.app.DAO.CardRepository;
@@ -28,5 +31,11 @@ public class CardServiceImpl implements CardService {
   @Override
   public BankCard findByNumber(String number) {
     return cardRepository.findByNumberOfCard(number);
+  }
+
+  public List<BankCard> findAll() {
+    List<BankCard> listOfCards = cardRepository.findAll();
+    listOfCards.sort(Comparator.comparing(BankCard::getNumberOfCard));
+    return listOfCards;
   }
 }
