@@ -15,6 +15,12 @@ public class CardServiceImpl implements CardService {
     this.cardRepository = cardRepository;
   }
 
+  @Override
+  public BankCard saveNewCard(BankCard card) {
+    card.setBalance(0);
+    return cardRepository.save(card);
+  }
+
   public BankCard save(BankCard card) {
     return cardRepository.save(card);
   }
