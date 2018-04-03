@@ -1,7 +1,9 @@
 package ua.com.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -38,7 +40,11 @@ public class BankCard {
   @NotNull(message = "address can not be null.")
   private String address;
 
-  @OneToOne(mappedBy = "card")
+  @Column(name = "balance")
+  @NotNull(message = "balance can not be null.")
+  private double balance;
+
+  @OneToOne(mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private User user;
 
   public Long getId() {
@@ -95,5 +101,13 @@ public class BankCard {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public double getBalance() {
+    return balance;
+  }
+
+  public void setBalance(double balance) {
+    this.balance = balance;
   }
 }

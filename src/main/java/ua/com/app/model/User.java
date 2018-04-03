@@ -1,7 +1,9 @@
 package ua.com.app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,14 +20,15 @@ public class User {
   @GeneratedValue
   private Long id;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "card")
   private BankCard card;
 
-  @NotNull
+  @NotNull(message = "numberOfCard can not be null.")
   @Transient
   private String numberOfCard;
 
+  @NotNull(message = "numberOfCard can not be null.")
   @Column(name = "password")
   private String password;
 
