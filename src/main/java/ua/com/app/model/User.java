@@ -1,5 +1,6 @@
 package ua.com.app.model;
 
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,5 +63,26 @@ public class User {
 
   public void setNumberOfCard(String numberOfCard) {
     this.numberOfCard = numberOfCard;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    User user = (User) o;
+    return Objects.equals(id, user.id) &&
+        Objects.equals(card, user.card) &&
+        Objects.equals(numberOfCard, user.numberOfCard) &&
+        Objects.equals(password, user.password);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, card, numberOfCard, password);
   }
 }
