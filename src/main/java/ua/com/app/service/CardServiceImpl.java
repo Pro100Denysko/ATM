@@ -1,6 +1,5 @@
 package ua.com.app.service;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,11 @@ public class CardServiceImpl implements CardService {
   public List<BankCard> findAll() {
     List<BankCard> listOfCards = cardRepository.findAll();
     listOfCards.sort(Comparator.comparing(BankCard::getNumberOfCard));
+    for (BankCard card : listOfCards) {
+      if (card.getUser() != null) {
+        card.getUser().setCard(null);
+      }
+    }
     return listOfCards;
   }
 }
