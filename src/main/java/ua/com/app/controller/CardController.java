@@ -25,7 +25,7 @@ public class CardController {
   }
 
   @RequestMapping(value = "/cards", method = RequestMethod.POST)
-  public ResponseEntity<String> createBankCard(@RequestBody BankCard card) {
+  public ResponseEntity<BankCard> createBankCard(@RequestBody BankCard card) {
     BankCard newCard = cardService.saveNewCard(card);
     if (newCard != null) {
       return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -35,7 +35,7 @@ public class CardController {
   }
 
   @RequestMapping(value = "/authCard", method = RequestMethod.POST)
-  public ResponseEntity<?> authCard(@RequestBody User user) {
+  public ResponseEntity<User> authCard(@RequestBody User user) {
     BankCard newCard = cardService.findByNumber(user.getNumberOfCard());
     if (newCard != null && newCard.getUser().getPassword().equals(user.getPassword())) {
       return ResponseEntity.status(HttpStatus.OK).build();
@@ -45,7 +45,7 @@ public class CardController {
   }
 
   @RequestMapping(value = "/transfer", method = RequestMethod.POST)
-  public ResponseEntity<?> transfer(@RequestBody Transfer transfer) {
+  public ResponseEntity<BankCard> transfer(@RequestBody Transfer transfer) {
     BankCard sendersCard = cardService.findByNumber(transfer.getSender().getNumberOfCard());
     BankCard recipientsCard = cardService.findByNumber(transfer.getNumberOfRecipientsCard());
     if (sendersCard != null && recipientsCard != null && sendersCard.getUser().getPassword()
@@ -68,11 +68,8 @@ public class CardController {
   }
 
   @RequestMapping(value = "/cards", method = RequestMethod.GET)
-  public ResponseEntity<?> findAllCards() {
+  public ResponseEntity<List<BankCard>> findAllCards() {
     List<BankCard> listOfCards = cardService.findAll();
-    for (BankCard card : listOfCards) {
-      card.getUser().setCard(null);
-    }
     return ResponseEntity.status(HttpStatus.OK).body(listOfCards);
   }
 }
